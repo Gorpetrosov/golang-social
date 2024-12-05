@@ -1,12 +1,22 @@
 package main
 
-import "log"
+import (
+	"log"
 
+	"github.com/Gorpetrosov/golang-social/internal/env"
+	"github.com/joho/godotenv"
+)
 
-func main()  {
+func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+  
 
 	cfg := config{
-		addr: ":8080",
+		addr: env.GetEnvString("ADDR", ":8000"),
 	}
 	app := &application{
 		config: cfg,
